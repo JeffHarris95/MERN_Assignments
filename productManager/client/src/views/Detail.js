@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios';
+import { navigate } from '@reach/router';
 const Detail = (props) => {
     const [product, setProduct] = useState({})
     useEffect(() => {
@@ -9,11 +10,10 @@ const Detail = (props) => {
             }))
     }, [])
 
-    const { removeFromDom, products} = props;
     const deleteProduct = (productId) => {
         axios.delete('http://localhost:8000/api/product/' + productId)
             .then(res => {
-                removeFromDom(productId)
+                navigate("/product")
             })
             .catch(err => console.log(err))
 
